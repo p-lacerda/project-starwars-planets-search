@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PlanetsContext from '../context/PlanetsContext';
 
 function Search() {
+  const { handleChange } = useContext(PlanetsContext);
   return (
-    <span>Hello, App!</span>
+    <form>
+      <label htmlFor="filter">
+        <input
+          id="filter"
+          placeholder="Filtrar por nome"
+          onChange={ handleChange }
+          data-testid="name-filter"
+        />
+      </label>
+    </form>
   );
 }
 

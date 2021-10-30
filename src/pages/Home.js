@@ -12,6 +12,7 @@ function Home() {
 
   return (
     <main>
+      <h1>Projeto Star Wars - Trybe</h1>
       <Search />
       <Table />
     </main>
