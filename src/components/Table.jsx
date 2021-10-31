@@ -2,7 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
-  const { data, loading, filterText, getData } = useContext(PlanetsContext);
+  const { data, loading, name,
+    getData, column, comparison, value } = useContext(PlanetsContext);
 
   // React Dynamic Table
   // https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg
@@ -19,7 +20,7 @@ function Table() {
 
   useEffect(() => {
     getData();
-  }, [filterText]);
+  }, [name]);
 
   return (
     loading ? <h2> Loading... </h2> : (
@@ -33,7 +34,7 @@ function Table() {
           <tbody>
             {/* Transformar mais tarde em dinâmico */}
             {data
-              .filter((planet) => planet.name.includes(filterText))
+              .filter((planet) => planet.name.includes(name))
               .map((dataPlanet, index) => (
                 <tr key={ index }>
                   <td data-testid="planet-name">{dataPlanet.name}</td>
