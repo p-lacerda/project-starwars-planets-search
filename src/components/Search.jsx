@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import SelectInput from './SelectInput';
 
 function Search() {
-  const { setName, setFilters, filters } = useContext(PlanetsContext);
-
-  const [column, setColumn] = useState('population');
-  const [comparison, setComparison] = useState('maior que');
-  const [value, setValue] = useState('');
+  const { setName, setFilters, setValue, setComparison, setColumn,
+    filters, btnActive, setBtnActive, comparison, column, value,
+  } = useContext(PlanetsContext);
 
   const dropdownArray = ['population',
     'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
@@ -24,7 +22,12 @@ function Search() {
         },
       ],
     });
+    setBtnActive(true);
   };
+
+  useEffect(() => {
+    setBtnActive(false);
+  }, [btnActive]);
 
   return (
     <form>

@@ -1,15 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function Table() {
-  const { data, loading, name,
-    getData, column, comparison, value } = useContext(PlanetsContext);
+  const { data, newData, loading, name } = useContext(PlanetsContext);
 
   // React Dynamic Table
   // https://dev.to/abdulbasit313/an-easy-way-to-create-a-customize-dynamic-table-in-react-js-3igg
   const renderHeader = () => {
-    const newData = Object.keys(data[0]);
-    return newData
+    const newHeaderData = Object.keys(data[0]);
+    return newHeaderData
       .map((thead) => thead.replace('_', ' '))
       .filter((thead) => thead !== 'residents')
       .map((thead) => (
@@ -17,10 +16,6 @@ function Table() {
           {thead}
         </th>));
   };
-
-  useEffect(() => {
-    getData();
-  }, [name]);
 
   return (
     loading ? <h2> Loading... </h2> : (
@@ -33,7 +28,7 @@ function Table() {
           </thead>
           <tbody>
             {/* Transformar mais tarde em dinâmico */}
-            {data
+            {newData
               .filter((planet) => planet.name.includes(name))
               .map((dataPlanet, index) => (
                 <tr key={ index }>
