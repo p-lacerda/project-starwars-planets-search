@@ -6,7 +6,8 @@ function PlanetsProvider({ children }) {
   const [column, setColumn] = useState('population');
   const [comparison, setComparison] = useState('maior que');
   const [value, setValue] = useState('');
-
+  const [dropdownArray, setDropdown] = useState(['population',
+    'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
   const [data, setData] = useState([]);
   const [newData, setNewData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ function PlanetsProvider({ children }) {
   const [btnActive, setBtnActive] = useState(false);
   const [filters, setFilters] = useState({
     filterByName: { name: '' },
-    filterByNumericValues: [{ column: '', comparison: '', value: '' }],
+    filterByNumericValues: [],
   });
 
   // Faz requisição e obtém o resultado atribuindo ele a data
@@ -27,19 +28,6 @@ function PlanetsProvider({ children }) {
     setLoading(false);
   };
 
-  // const filterFunction = (comp, col, val) => {
-  //   switch (comp) {
-  //   case 'maior que':
-  //     return console.log(column, val);
-  //   case 'menor que':
-  //     return col < val;
-  //   case 'igual a':
-  //     return col === val;
-  //   default:
-  //     return console.log('def');
-  //   }
-  // };
-
   // Referẽncia ao código de César Meira - T14A
   // https://github.com/tryber/sd-014-a-project-starwars-planets-search/blob/cesar-meira-project-starwars/src/context/SWProvider.js
   useEffect(() => {
@@ -47,7 +35,6 @@ function PlanetsProvider({ children }) {
   }, [name]);
 
   useEffect(() => {
-    // eslint-disable-next-line no-magic-numbers
     const number = Number(value);
     let filtered;
     if (comparison === 'maior que') {
@@ -79,6 +66,8 @@ function PlanetsProvider({ children }) {
         setComparison,
         comparison,
         setValue,
+        setDropdown,
+        dropdownArray,
       } }
     >
       { children }
